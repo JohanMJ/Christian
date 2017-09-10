@@ -14,6 +14,7 @@ public class Clock {
 		Date resultdate = new Date(System.currentTimeMillis());
 		System.out.println(sdf.format(resultdate));
 		clientTime = time;
+		
 		final long start = time;
 		final long end = serverTime;
 		final long i = end - start;
