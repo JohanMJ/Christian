@@ -1,0 +1,30 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from ClockService WSDL service -->
+
+  <service name="Clock" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://server"/>
+      <parameter name="wsdlServiceElement" value="ClockService"/>
+      <parameter name="schemaQualified" value="http://server"/>
+      <parameter name="wsdlServicePort" value="Clock"/>
+      <parameter name="className" value="server.ClockSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="Clock"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="enviarMensagem" qname="operNS:enviarMensagem" xmlns:operNS="http://server" returnQName="retNS:enviarMensagemReturn" xmlns:retNS="http://server" returnType="rtns:long" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:time" xmlns:pns="http://server" type="tns:long" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:mensagem" xmlns:pns="http://server" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="enviarMensagem"/>
+
+  </service>
+</deployment>
